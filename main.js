@@ -11,6 +11,7 @@ var assets = [];
 var totalAmountCashIn = 0;
 var totalAmountCashOut = 0;
 var searchQuery = "";
+// Function to add a new asset
 function addAsset(event) {
     event.preventDefault();
     var assetDateInput = document.getElementById("assetDate");
@@ -40,6 +41,7 @@ function addAsset(event) {
     displayAssets();
     displayTotalAmount();
 }
+//Function to filter asset
 function filterAssets() {
     var filterTypeSelect = document.getElementById("filterType");
     var filterType = filterTypeSelect.value;
@@ -53,6 +55,7 @@ function filterAssets() {
     }
     return filteredAssets;
 }
+// Function to display assets in the table
 function displayAssets() {
     var formatter = new Intl.NumberFormat("id-ID", {
         style: "currency",
@@ -92,6 +95,7 @@ function displayAssets() {
         assetTableBody.appendChild(row);
     });
 }
+// Function to display total asset amounts
 function displayTotalAmount() {
     var formatter = new Intl.NumberFormat("id-ID", {
         style: "currency",
@@ -107,6 +111,7 @@ function displayTotalAmount() {
     var balanceCash = totalAmountCashIn - totalAmountCashOut;
     balanceCashTotalElement.textContent = formatter.format(balanceCash);
 }
+// Function to show the update dialog for an asset
 function showUpdateDialog(index) {
     var asset = assets[index];
     var oldAmount = asset.amount;
@@ -134,6 +139,7 @@ function showUpdateDialog(index) {
         alert("Invalid input. Update canceled.");
     }
 }
+// Function to delete an asset
 function deleteAsset(index) {
     var asset = assets[index];
     var confirmDelete = confirm("Apakah kamu ingin menghapus bagian ini?");
@@ -150,11 +156,13 @@ function deleteAsset(index) {
         displayTotalAmount();
     }
 }
+// Function to save data to local storage
 function saveDataToLocalStorage() {
     localStorage.setItem("assets", JSON.stringify(assets));
     localStorage.setItem("totalAmountCashIn", totalAmountCashIn.toString());
     localStorage.setItem("totalAmountCashOut", totalAmountCashOut.toString());
 }
+// Function to load data from local storage
 function loadDataFromLocalStorage() {
     var assetsData = localStorage.getItem("assets");
     if (assetsData) {
@@ -169,6 +177,7 @@ function loadDataFromLocalStorage() {
         totalAmountCashOut = parseFloat(totalAmountCashOutData);
     }
 }
+// Function to clear all data
 function clearData() {
     var confirmClear = confirm("Apakah kamu ingin menghapus semua data?");
     if (confirmClear) {
@@ -180,6 +189,7 @@ function clearData() {
         displayTotalAmount();
     }
 }
+// Event listeners
 var assetForm = document.getElementById("assetForm");
 assetForm.addEventListener("submit", addAsset);
 var clearDataButton = document.getElementById("clearDataButton");
@@ -192,6 +202,8 @@ searchInput.addEventListener("input", function (event) {
     searchQuery = target.value;
     displayAssets();
 });
+// Load data from local storage when the app starts
 loadDataFromLocalStorage();
+// Display assets and total amounts
 displayAssets();
 displayTotalAmount();

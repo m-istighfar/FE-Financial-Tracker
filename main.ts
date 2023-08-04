@@ -1,3 +1,4 @@
+// Define global variables
 type Asset = {
   date: string;
   type: string;
@@ -10,6 +11,8 @@ let totalAmountCashIn : number = 0;
 let totalAmountCashOut : number = 0;
 let searchQuery : string = "";
 
+
+// Function to add a new asset
 function addAsset(event: Event) : void {
   event.preventDefault();
 
@@ -46,6 +49,7 @@ function addAsset(event: Event) : void {
   displayTotalAmount();
 }
 
+//Function to filter asset
 function filterAssets(): Asset[] {
   const filterTypeSelect = document.getElementById("filterType") as HTMLInputElement;
   const filterType : string = filterTypeSelect.value;
@@ -63,6 +67,7 @@ function filterAssets(): Asset[] {
   return filteredAssets;
 }
 
+// Function to display assets in the table
 function displayAssets() : void {
   const formatter = new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -114,6 +119,7 @@ function displayAssets() : void {
   });
 }
 
+// Function to display total asset amounts
 function displayTotalAmount() : void {
   const formatter = new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -133,6 +139,7 @@ function displayTotalAmount() : void {
   balanceCashTotalElement.textContent = formatter.format(balanceCash);
 }
 
+// Function to show the update dialog for an asset
 function showUpdateDialog(index: number) : void {
   const asset = assets[index];
   const oldAmount : number = asset.amount;
@@ -163,6 +170,7 @@ function showUpdateDialog(index: number) : void {
   }
 }
 
+// Function to delete an asset
 function deleteAsset(index: number) : void {
   const asset = assets[index];
   const confirmDelete : boolean = confirm("Apakah kamu ingin menghapus bagian ini?");
@@ -181,12 +189,14 @@ function deleteAsset(index: number) : void {
   }
 }
 
+// Function to save data to local storage
 function saveDataToLocalStorage() : void {
   localStorage.setItem("assets", JSON.stringify(assets));
   localStorage.setItem("totalAmountCashIn", totalAmountCashIn.toString());
   localStorage.setItem("totalAmountCashOut", totalAmountCashOut.toString());
 }
 
+// Function to load data from local storage
 function loadDataFromLocalStorage() : void {
   const assetsData : string | null = localStorage.getItem("assets");
   if (assetsData) {
@@ -204,6 +214,7 @@ function loadDataFromLocalStorage() : void {
   }
 }
 
+// Function to clear all data
 function clearData() : void{
   const confirmClear : boolean = confirm("Apakah kamu ingin menghapus semua data?");
   if (confirmClear) {
@@ -217,6 +228,7 @@ function clearData() : void{
   }
 }
 
+// Event listeners
 const assetForm = document.getElementById("assetForm") as HTMLElement;
 assetForm.addEventListener("submit", addAsset);
 
@@ -233,6 +245,9 @@ searchInput.addEventListener("input", (event) => {
   displayAssets();
 });
 
+// Load data from local storage when the app starts
 loadDataFromLocalStorage();
+
+// Display assets and total amounts
 displayAssets();
 displayTotalAmount();
