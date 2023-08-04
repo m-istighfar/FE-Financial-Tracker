@@ -14,6 +14,10 @@ This application includes a specific sequence of operations that are represented
 
 ![flowchart](./flow.png)
 
+## Deployment
+
+This project is deployed here: [https://week-7-tifff.netlify.app/](https://week-7-tifff.netlify.app/)
+
 ## Features
 
 ### 1. Add Transactions
