@@ -1,5 +1,4 @@
-/* Global Styles */
-body {
+Global Styles body {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,7 +73,6 @@ td:not(:last-child) {
 }
 
 @media screen and (max-width: 768px) {
-  /* Adjust breakpoint as needed */
   .table-responsive {
     overflow-x: auto;
     display: block;
